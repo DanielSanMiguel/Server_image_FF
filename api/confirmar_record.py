@@ -10,6 +10,11 @@ AIRTABLE_API_KEY = os.environ.get("AIRTABLE_API_KEY")
 AIRTABLE_BASE_ID = os.environ.get("AIRTABLE_BASE_ID")
 AIRTABLE_TABLE_NAME = "Confirmaciones_de_Entrega"
 
+
+@app.route("/test", methods=["GET"])
+def test():
+    return "¡Funciona!", 200
+
 @app.route("/", methods=["GET"])
 def confirmar_record():
     record_id = request.args.get("record_id")
