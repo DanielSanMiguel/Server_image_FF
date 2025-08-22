@@ -3,7 +3,7 @@
 from flask import Flask, request, jsonify, render_template
 import requests, os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="../templates")
 api = app  # Vercel necesita esta variable
 
 AIRTABLE_API_KEY = os.environ.get("AIRTABLE_API_KEY")
@@ -55,5 +55,4 @@ def confirmar_record():
             return jsonify({"error": f"Error de API: {e}"}), 500
     except requests.exceptions.RequestException as e:
         return jsonify({"error": f"Error de conexión: {e}"}), 500
-
 
