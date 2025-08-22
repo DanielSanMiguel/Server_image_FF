@@ -1,16 +1,15 @@
-# api/index.py
-
 from flask import Flask, request, jsonify, render_template
 import requests
 import os
 
 app = Flask(__name__)
-api = app  # Vercel needs a variable named 'api' or 'app'
+api = app  # Vercel necesita esta variable
 
 AIRTABLE_API_KEY = os.environ.get("AIRTABLE_API_KEY")
 AIRTABLE_BASE_ID = os.environ.get("AIRTABLE_BASE_ID")
 AIRTABLE_TABLE_NAME = "Confirmaciones_de_Entrega"
 
+# 👇 importante: usar "/" en lugar de "/confirmar_record"
 @app.route("/", methods=["GET"])
 def confirmar_record():
     record_id = request.args.get("record_id")
@@ -40,12 +39,7 @@ def confirmar_record():
 
         data = {
             "records": [
-                {
-                    "id": record_id,
-                    "fields": {
-                        "Verificado": "Verificado"
-                    }
-                }
+                {"id": record_id, "fields": {"Verificado": "Verificado"}}
             ]
         }
 
@@ -59,6 +53,6 @@ def confirmar_record():
             return jsonify({"error": "Registro no encontrado. Verificación fallida."}), 404
         else:
             return jsonify({"error": f"Error de API: {e}"}), 500
-
     except requests.exceptions.RequestException as e:
         return jsonify({"error": f"Error de conexión: {e}"}), 500
+
