@@ -8,8 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/api/confirmar_record",
-      "dest": "api/confirmar_record.py"
+      "src": "/(.*)",
+      "dest": "/api/confirmar_record.py"
     }
   ]
 }
